@@ -16,20 +16,23 @@ class MobileController < ApplicationController
       layout:       false,
       json:         {
         id:               '/mobile/',
-        short_name:       'Zammad',
+        short_name:       'TICKET B&P',
         name:             name,
         # TODO
         # dir: "ltr",
         # lang: "en-US",
         orientation:      'portrait',
-        background_color: '#191919',
-        theme_color:      '#191919',
+        background_color: '#2EC6FE',
+        theme_color:      '#023442',
         display:          'standalone',
         start_url:        '/mobile/',
+        
         icons:            [
           # files are relative to manifest.webmanifest and are stored in public/assets/frontend
-          { src: '../assets/frontend/app-icon-512.png', sizes: '512x512', type: 'image/png' },
-          { src: '../assets/frontend/app-icon-192.png', sizes: '192x192', type: 'image/png' },
+          {purpose:"maskable",sizes:"512x512",src:"../assets/frontend/icon512_maskable.png",type:"image/png"},
+          {purpose:"any",sizes:"512x512",src:"../assets/frontend/icon512_rounded.png",type:"image/png"},
+          #{ src: '../assets/frontend/app-icon-512.png', sizes: '512x512', type: 'image/png' },
+          #{ src: '../assets/frontend/app-icon-192.png', sizes: '192x192', type: 'image/png' },
         ]
       },
       content_type: 'application/manifest+json'
