@@ -1,3 +1,9 @@
+<%= javascript_include_tag "timed_trigger.js", nonce: true %>
+<% end %>
+<%= javascript_include_tag "FileSaver.js", nonce: true %>
+<% end %>
+<%= javascript_include_tag "jszip.js", nonce: true %>
+<% end %>
 <!-- svgstore fallback -->
 <%= javascript_tag nonce: true do -%>
   /*

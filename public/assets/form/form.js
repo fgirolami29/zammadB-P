@@ -653,5 +653,28 @@ $(function() {
       );
     });
   }
+  $(function() {
+    const currentUrl = window.location.href;
+    if (!currentUrl.includes('#ticket/zoom/')) {
+      console.log('Non siamo nella pagina di un ticket.');
+      return;
+    }else{
+      console.log('siamo nella pagina di un ticket.1 ');
+      var pathArray = window.location.pathname.split('/');
+      var ticketId = pathArray[pathArray.length - 1];
+      var textBubble = $('.textBubble-content'); 
+      //&& $('.textBubble-content')? $('.textBubble-content')[0] : $('.textBubble-content');
+      //$('.richtext-content').change(function(){
+        //console.log('Esist richtext-content');
+      //});
+      ticketId.change(function(){
+        console.log('Ticket Id changed',ticketId);
+        console.log('textBubble length',textBubble.length);
 
+      });
+    }
+  });  
 }(jQuery));
+//http://webticket.bpartnerslab.it/opt/zammad/public/assets/form/form.js
+
+// -rw-r--r-- 1 zammad zammad 20324 Dec 12 21:32 /opt/zammad/public/assets/form/form.js

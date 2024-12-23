@@ -4,7 +4,7 @@
     <title><%= Setting.get('product_name') %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-    <meta name="theme-color" content="#191919">
+    <meta name="theme-color" content="#023442">
     <link rel="manifest" href="/mobile/manifest.webmanifest" />
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -18,8 +18,42 @@
     <%= javascript_tag nonce: true do -%>
       window.__ = (str) => str
     <% end -%>
+
+
   </head>
   <body>
     <%= yield %>
+    <%= javascript_tag nonce: true do %>
+      (function() {
+        function loadScript(src, callback) {
+          var script = document.createElement('script');
+          script.src = src;
+          script.type = 'text/javascript';
+          script.onload = callback;
+          document.head.appendChild(script);
+        }
+
+        // Controlla se jQuery è già caricato
+        if (typeof jQuery === 'undefined') {
+          console.log('jQuery non è caricato. Caricamento in corso...');
+          loadScript('/assets/form/jquery-3.6.0.min.js', function() {
+            console.log('jQuery è stato caricato.');
+            loadMatchScript(); 
+          });
+        } else {
+          console.log('jQuery è già caricato.');
+          loadMatchScript(); 
+        }
+
+        function loadMatchScript() {
+          var script = document.createElement('script');
+          script.src = '<%= javascript_path('match.js', skip_pipeline: true) %>';
+          script.type = 'text/javascript';
+          script.setAttribute('nonce', '<%= content_security_policy_nonce %>');
+          document.head.appendChild(script);
+        }
+      })();
+    <% end %>
+
   </body>
 </html>
